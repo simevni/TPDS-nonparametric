@@ -1,19 +1,18 @@
 function [betaR,P,knots] = bSplineSieve(x,y,w,orderPoly,nknots)
-%Input:
-% x: x values. x may include duplicated values.
-% x_c: unique values of x
-% y: target outcome
-% w: weight
-% c: nonlinear constraint const.
-% orderPoly:
-% nknots: number of knots for B-spline basis
-% knots_in: knots. real vector with length=nknots. optional.
-% inference: 0: no test, 1: compute critical value with level of
-% significance = alpha
-%Output:
+% Find the coefficients that minimizes the predicted and the target
+% outcomes using linear sieve estimation method with monotonicity constraint.
+% B-spline basis are used.
+%Input
+% x: integer or real vector (n). control variable in the data. x may include duplicated values.
+% y: integer or real vector (n). target outcome.
+% w: integer or real vector (n). weight (optional)
+% orderPoly: integer (1). the order of B-spline polynomials.
+% nknots: integer (1). number of knots for B-spline basis
+%Output
 % betaR: coefficient estimates
-% P: regression basis
-% testResult: 0 if the computed test statistic < critical value, 1 otherwise.
+% P: integer or real matrix (n,orderPoly+1+nknots). regression basis
+% knots: integer or real vector (nknots).
+
 
     %% Construction of bases
     x_c = unique(x);
