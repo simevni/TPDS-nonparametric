@@ -64,7 +64,7 @@ function [betaR,rejectNull] = CNS2015(cashoffer,x,y,w,mv,c,orderPoly,nknots,alph
 	problem.bineq = ineqc_RHS; 
 	problem.nonlcon= @(theta)nonlconfunc(theta,arg2); %consumer surplus
 	
-	[betaR,fval,exitflag,output] = fmincon(problem);	
+	[betaR,testStat,exitflag,output] = fmincon(problem);	
     c1 = [ineqc_LHS*betaR ineqc_RHS];
 	cdf = P*betaR;
     [~,cval,otherOutputs] = nonlconfunc(betaR,arg2); % check nonlinear constraint   
@@ -75,11 +75,11 @@ function [betaR,rejectNull] = CNS2015(cashoffer,x,y,w,mv,c,orderPoly,nknots,alph
     %% Compute the critical value
     rho = y - P*betaR;
     arg2 = [[[c; mv]; zeros(n-2,1)] cashoffer P];
-    ub = criticalValue (betaR,rho,P,w,ineqc_LHS,ineqc_RHS,arg2,alpha);	
+    cv = criticalValue (betaR,rho,P,w,ineqc_LHS,ineqc_RHS,arg2,alpha);	
 
     %% Check whether c is included in cv
     rejectNull = 1;
-    if (fval<=ub) 
+    if (testStat<=cv) 
        rejectNull = 0;
     end
     
