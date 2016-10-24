@@ -1,12 +1,18 @@
 function [betaR,rejectNull] = CNS2015(cashoffer,x,y,w,mv,c,orderPoly,nknots,alpha,beta0)
 % Inputs:
-% cashoffer:
-% P:
-% y:
-% w: 
-% mv:
-% c:
-% alpha:
+% cashoffer: integer or real vector (n). data. the values of x before normalization. 
+% x: integer or real vector (n). data. control variable.
+% y: integer or real vector (n). data. dependent variable.
+% w: real vector (n). weight.
+% mv: real (1). fiscal value of the rations. will be used in nonlinear
+% constraint.
+% c: real (1). nonlinear constraint function value.
+% orderPoly: integer (1). the order of B-spline polynomials. 
+% nknots: integer (1). the number of B-spline knots 
+% alpha: real (1). level of significance.
+% beta0: real vector (orderPoly+1+nknots). initial guess for beta.
+
+
     %% Construction of bases
     n = length(x);
     x_c = unique(x);
