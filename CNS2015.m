@@ -1,5 +1,8 @@
 function [betaR,rejectNull] = CNS2015(cashoffer,x,y,w,mv,c,orderPoly,nknots,alpha,beta0)
-% Inputs:
+% Reference: 
+% Chernozhukov, Victor, Whitney Newey, and Andres Santos (2015). "Constrained conditional moment restriction models" (No. CWP59/15). Centre for Microdata Methods and Practice, Institute for Fiscal Studies.
+%-----------
+%Inputs:
 % cashoffer: integer or real vector (n). data. the values of x before normalization. 
 % x: integer or real vector (n). data. control variable.
 % y: integer or real vector (n). data. dependent variable.
@@ -11,7 +14,11 @@ function [betaR,rejectNull] = CNS2015(cashoffer,x,y,w,mv,c,orderPoly,nknots,alph
 % nknots: integer (1). the number of B-spline knots 
 % alpha: real (1). level of significance.
 % beta0: real vector (orderPoly+1+nknots). initial guess for beta.
-
+%-----------
+%Outputs:
+% betaR: real vector (orderPoly+1+nknots). coefficient estimates.
+% rejectNull: integer (1). 1 if the null hypothesis is rejected. 0
+% otherwise.
 
     %% Construction of bases
     n = length(x);
